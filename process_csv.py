@@ -1,5 +1,7 @@
 import argparse
+import csv
 import sys
+import numpy as np
 
 
 def compare_csv_files(file1, file2, output):
@@ -10,7 +12,24 @@ def compare_csv_files(file1, file2, output):
     :param output: output file path
     """
     pass
-    # compare them
+    f1 = open(file1, 'r')
+    f2 = open(file2, 'r')
+    list1 = np.array(list(csv.reader(f1)))
+    list2 = np.array(list(csv.reader(f2)))
+
+    ids1 = list1[1:, 0]
+    print(f'infile 1 ids: {ids1}')
+    ids2 = list2[1:, 0]
+    print(f'infile 2 ids: {ids2}')
+
+    result = list()
+
+    for id_value in ids1:
+        if id_value in ids2:
+            result.append(id_value)
+
+    # write out results to a new csv/text file?
+    print(f'matches: {result}')
 
 
 def main():
