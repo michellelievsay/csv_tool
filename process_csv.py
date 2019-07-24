@@ -28,8 +28,14 @@ def compare_csv_files(file1, file2, output):
         if id_value in ids2:
             result.append(id_value)
 
-    # write out results to a new csv/text file?
     print(f'matches: {result}')
+    with open(output, mode='w', newline='') as output_file:
+        id_writer = csv.writer(output_file,
+                               delimiter=',',
+                               quotechar='"',
+                               quoting=csv.QUOTE_MINIMAL)
+        for item in result:
+            id_writer.writerow([item])
 
 
 def main():
